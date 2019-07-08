@@ -1,3 +1,6 @@
+require 'pry'
+
+
 describe "Grocer" do
   let(:items) do
     [
@@ -233,7 +236,6 @@ describe "Grocer" do
         milk = find_item("SOY MILK")
         cart = [milk, avocado, avocado, cheese, cheese, cheese]
         coupons = [find_coupon("AVOCADO"), find_coupon("CHEESE")]
-
         consolidated = consolidate_cart(cart)
         coupons_applied = apply_coupons(consolidated, coupons)
         clearance_applied = apply_clearance(coupons_applied)
@@ -241,7 +243,6 @@ describe "Grocer" do
         expect(self).to receive(:consolidate_cart).with(cart).and_return(consolidated)
         expect(self).to receive(:apply_coupons).with(consolidated, coupons).and_return(coupons_applied)
         expect(self).to receive(:apply_clearance).with(coupons_applied).and_return(clearance_applied)
-
         expect(checkout(cart, coupons)).to eq(22.60)
       end
 
